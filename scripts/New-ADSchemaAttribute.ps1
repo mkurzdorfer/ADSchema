@@ -73,7 +73,7 @@ Function New-ADSchemaAttribute {
         $IsSingleValued = $True,
 
         [Parameter(Mandatory, ValueFromPipelinebyPropertyName, ParameterSetName = 'basic')]
-        [ValidateSet('String','StringOctet','DN','Int','GeneralizedTime','Boolean')]
+        [ValidateSet('UnicodeString','String','StringOctet','DN','Int','GeneralizedTime','Boolean')]
         [String]
         $AttributeType ,
 
@@ -99,6 +99,7 @@ Function New-ADSchemaAttribute {
         else {
              # based on https://technet.microsoft.com/en-us/library/cc961740.aspx
             switch ($AttributeType) {
+                'UnicodeString'     {$attributeSyntax = '2.5.5.12';  $omSyntax = 64}
                 'String'            {$attributeSyntax = '2.5.5.4';  $omSyntax = 20}
                 'StringOctet'       {$attributeSyntax = '2.5.5.10'; $omSyntax = 4}
                 'DN'                {$attributeSyntax = '2.5.5.1';  $omSyntax = 127}
